@@ -1,7 +1,7 @@
 package net.chef.cropxp;
 
-import net.chef.cropxp.config.ModConfigs;
 import net.chef.cropxp.events.HarvestEvent;
+import net.chef.cropxp.init.ConfigInit;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ public class XpFromCrops implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModConfigs.registerConfigs();
+		ConfigInit.init();
 		HarvestEvent harvest = new HarvestEvent();
 	}
 }
