@@ -1,7 +1,7 @@
 package net.chef.cropxp.events;
 
 import net.chef.cropxp.XpFromCrops;
-import net.chef.cropxp.init.ConfigInit;
+import net.chef.cropxp.config.ConfigRegister;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ExperienceOrbEntity;
@@ -31,10 +31,10 @@ public class HarvestEvent {
     public void handleHarvest(ServerWorld world, BlockState state, BlockPos pos, PlayerEntity player) {
         Vec3d vec = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
         String blockString = state.toString().replace("Block{", "").replace("}", "");
-        boolean giveXp = Arrays.asList(ConfigInit.CONFIG.crops).toString().contains(blockString);
-        if (giveXp && world.random.nextInt(100) + 1 <= ConfigInit.CONFIG.chance) {
-            ExperienceOrbEntity.spawn(world, vec, ConfigInit.CONFIG.amount);
-            XpFromCrops.LOGGER.info(ConfigInit.CONFIG.amount + " Experience added for " + state.getBlock().getTranslationKey());
+        boolean giveXp = Arrays.asList(ConfigRegister.CONFIG.crops).toString().contains(blockString);
+        if (giveXp && world.random.nextInt(100) + 1 <= ConfigRegister.CONFIG.chance) {
+            ExperienceOrbEntity.spawn(world, vec, ConfigRegister.CONFIG.amount);
+            XpFromCrops.LOGGER.info(ConfigRegister.CONFIG.amount + " Experience added for " + state.getBlock().getTranslationKey());
         }
     }
 }

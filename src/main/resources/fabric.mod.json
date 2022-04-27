@@ -4,17 +4,18 @@
   "version": "${version}",
 
   "name": "Xp From Crops",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Minecraft Fabric mod that will give the player XP for harvesting crops.",
   "authors": [
-    "Chef"
+    "Chef",
+    "Deanin"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/DeaninCraft/Xp-From-Crops"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/cropxp.png",
 
   "environment": "*",
   "entrypoints": {

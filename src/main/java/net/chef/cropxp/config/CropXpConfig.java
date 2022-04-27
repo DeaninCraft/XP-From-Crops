@@ -1,9 +1,11 @@
 package net.chef.cropxp.config;
 
 import blue.endless.jankson.Comment;
+import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.chef.cropxp.XpFromCrops;
 
 @Config(name = XpFromCrops.MOD_ID)
