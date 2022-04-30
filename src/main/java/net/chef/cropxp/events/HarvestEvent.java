@@ -29,8 +29,7 @@ public class HarvestEvent {
 
     public void handleHarvest(ServerWorld world, BlockState state, BlockPos pos) {
         Vec3d vec = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
-        boolean isMaxAge = (getCropAge(state) == getMaxCropAge(state));
-        boolean giveXp = state.isIn(BlockTags.CROPS) && isMaxAge;
+        boolean giveXp = state.isIn(BlockTags.CROPS) && (getCropAge(state) == getMaxCropAge(state));
         if (giveXp && world.random.nextInt(100) + 1 <= ConfigRegister.CONFIG.chance) {
             ExperienceOrbEntity.spawn(world, vec, ConfigRegister.CONFIG.amount);
             XpFromCrops.LOGGER.info(ConfigRegister.CONFIG.amount + " Experience added for " + state.getBlock().getTranslationKey());
