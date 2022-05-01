@@ -3,6 +3,8 @@ package net.chef.cropxp.events;
 import net.chef.cropxp.XpFromCrops;
 import net.chef.cropxp.config.ConfigRegister;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.levelz.LevelzClient;
+import net.levelz.entity.LevelExperienceOrbEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -34,6 +36,7 @@ public class HarvestEvent {
         boolean giveXp = state.isIn(BlockTags.CROPS) && (getCropAge(state) == getMaxCropAge(state));
         if (giveXp && world.random.nextInt(100) + 1 <= ConfigRegister.CONFIG.chance) {
             ExperienceOrbEntity.spawn(world, vec, ConfigRegister.CONFIG.amount);
+            LevelExperienceOrbEntity.spawn(world, vec, ConfigRegister.CONFIG.amount);
             XpFromCrops.LOGGER.info(ConfigRegister.CONFIG.amount + " Experience added for " + state.getBlock().getTranslationKey());
         }
     }
