@@ -11,6 +11,8 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.Objects;
+
 public class HarvestEvent {
     public HarvestEvent() {
         PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
@@ -18,7 +20,7 @@ public class HarvestEvent {
                 return;
             }
             try {
-                ServerWorld serverWorld = player.getServer().getWorld(world.getRegistryKey());
+                ServerWorld serverWorld = Objects.requireNonNull(player.getServer()).getWorld(world.getRegistryKey());
                 handleHarvest(serverWorld, state, pos);
             }
             catch (Exception e) {
@@ -38,14 +40,14 @@ public class HarvestEvent {
     public static int getCropAge(BlockState state) {
         Property AGE = null;
         for (Property property:state.getProperties()) {
-            if(property.getName() == "age") AGE = property;
+            if(property.getName().equals("age")) AGE = property;
         }
         return Integer.parseInt(state.get(AGE).toString());
     }
 
     public static int getMaxCropAge(BlockState state) {
         for (Property property:state.getProperties()) {
-            if(property.getName() == "age") {
+            if(property.getName().equals("age")) {
                 Object[] ages = property.getValues().toArray();
                 double maxValue = -1;
                 int indexOfMaxValue = -1;
