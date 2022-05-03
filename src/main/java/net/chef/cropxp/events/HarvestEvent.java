@@ -38,10 +38,7 @@ public class HarvestEvent {
         }
     }
     public static int getCropAge(BlockState state) {
-        Property AGE = null;
-        for (Property property:state.getProperties()) {
-            if(property.getName().equals("age")) AGE = property;
-        }
+        Property AGE = state.getProperties().stream().filter(property -> property.getName().equals("age")).findFirst().orElseThrow();
         return Integer.parseInt(state.get(AGE).toString());
     }
 
