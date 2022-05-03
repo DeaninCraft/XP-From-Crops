@@ -31,6 +31,7 @@ public class HarvestEvent {
 
     public void handleHarvest(ServerWorld world, BlockState state, BlockPos pos) {
         Vec3d vec = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
+        XpFromCrops.LOGGER.info("Age: " + getCropAge(state));
         boolean giveXp = state.isIn(BlockTags.CROPS) && (getCropAge(state) == getMaxCropAge(state));
         if (giveXp && world.random.nextInt(100) + 1 <= ConfigRegister.CONFIG.chance) {
             ExperienceOrbEntity.spawn(world, vec, ConfigRegister.CONFIG.amount);
@@ -38,7 +39,7 @@ public class HarvestEvent {
         }
     }
     public static int getCropAge(BlockState state) {
-        Property AGE = state.getProperties().stream().filter(property -> property.getName().equals("age")).findFirst().orElseThrow();
+        Property<?> AGE = state.getProperties().stream().filter(property -> property.getName().equals("age")).findFirst().orElseThrow();
         return Integer.parseInt(state.get(AGE).toString());
     }
 
