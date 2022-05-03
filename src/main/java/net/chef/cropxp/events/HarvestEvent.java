@@ -11,6 +11,7 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class HarvestEvent {
@@ -31,11 +32,10 @@ public class HarvestEvent {
 
     public void handleHarvest(ServerWorld world, BlockState state, BlockPos pos) {
         Vec3d vec = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
-        XpFromCrops.LOGGER.info("Age: " + getCropAge(state));
-        boolean giveXp = state.isIn(BlockTags.CROPS) && (getCropAge(state) == getMaxCropAge(state));
+        boolean isDenied = Arrays.toString(ConfigRegister.CONFIG.cropDenyList).contains(state.getBlock().toString());
+        boolean giveXp = state.isIn(BlockTags.CROPS) && !isDenied && (getCropAge(state) == getMaxCropAge(state));
         if (giveXp && world.random.nextInt(100) + 1 <= ConfigRegister.CONFIG.chance) {
             ExperienceOrbEntity.spawn(world, vec, ConfigRegister.CONFIG.amount);
-            XpFromCrops.LOGGER.info(ConfigRegister.CONFIG.amount + " Experience added for " + state.getBlock().getTranslationKey());
         }
     }
     public static int getCropAge(BlockState state) {

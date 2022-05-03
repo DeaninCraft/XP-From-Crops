@@ -8,7 +8,6 @@ import net.chef.cropxp.XpFromCrops;
 
 @Config(name = XpFromCrops.MOD_ID)
 public class CropXpConfig implements ConfigData {
-
     @ConfigEntry.Category("xp_settings")
     @Comment("% Chance for xp tp drop from harvest : Range(1-100)")
     public int chance = 100;
@@ -16,5 +15,12 @@ public class CropXpConfig implements ConfigData {
     @ConfigEntry.Category("xp_settings")
     @Comment("Amount of xp dropped from harvest : Minimum 1")
     public int amount = 1;
+
+    @ConfigEntry.Category("xp_settings")
+    @Comment("List of crops that will not drop xp")
+    public String[] cropDenyList = {
+            "Block{minecraft:pumpkin_stem}",
+            "Block{minecraft:melon_stem}"
+    };
 
 }
