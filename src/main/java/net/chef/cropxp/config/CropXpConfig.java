@@ -23,4 +23,10 @@ public class CropXpConfig implements ConfigData {
             "Block{minecraft:melon_stem}"
     };
 
+    @ConfigEntry.Category("xp_settings")
+    @Comment("List of extra crops that you want to drop xp, if they aren't included in the CROPS tag")
+    public String[] cropAllowList = {
+            "Block{minecraft:nether_wart}"
+    };
+
 }
