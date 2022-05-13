@@ -6,13 +6,14 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.Property;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.Arrays;
 import java.util.Objects;
+
+import static net.chef.cropxp.helpers.HarvestHelp.*;
 
 public class HarvestEvent {
     public HarvestEvent() {
@@ -38,26 +39,5 @@ public class HarvestEvent {
         if (giveXp && world.random.nextInt(100) + 1 <= ConfigRegister.CONFIG.chance) {
             ExperienceOrbEntity.spawn(world, vec, ConfigRegister.CONFIG.amount);
         }
-    }
-    public static int getCropAge(BlockState state) {
-        Property<?> AGE = state.getProperties().stream().filter(property -> property.getName().equals("age")).findFirst().orElseThrow();
-        return Integer.parseInt(state.get(AGE).toString());
-    }
-
-    public static int getMaxCropAge(BlockState state) {
-        for (Property property:state.getProperties()) {
-            if(property.getName().equals("age")) {
-                Object[] ages = property.getValues().toArray();
-                double maxValue = -1;
-                int indexOfMaxValue = -1;
-                for(int i = 0; i < ages.length; i++) {
-                    if(Integer.parseInt(ages[i].toString()) > maxValue) {
-                        indexOfMaxValue = i;
-                    }
-                }
-                return Integer.parseInt(ages[indexOfMaxValue].toString());
-            }
-        }
-        return 0;
     }
 }

@@ -8,6 +8,10 @@ import net.chef.cropxp.XpFromCrops;
 
 @Config(name = XpFromCrops.MOD_ID)
 public class CropXpConfig implements ConfigData {
+
+    @ConfigEntry.Category("harvest_settings")
+    @Comment("Enables right-click auto-replanting with crop in-hand")
+    public Boolean autoReplant = false;
     @ConfigEntry.Category("xp_settings")
     @Comment("% Chance for xp tp drop from harvest : Range(1-100)")
     public int chance = 100;
